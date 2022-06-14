@@ -1,36 +1,23 @@
-﻿using RevoltSharp;
+﻿using Revolt;
+using Revolt.Channels;
 using Trinity.Shared;
 
 namespace Trinity.Revolt
 {
     internal class TrinityRevoltChannel : ITrinityChannel
     {
-        private string x;
-        private RevoltClient client;
-        public Channel Channel { get; set; }
-        private TextChannel? text { get; set; }
-        private VoiceChannel? voice { get; set; }
-        private Server Server { get; set; }
-
-        public TrinityRevoltChannel(string x, RevoltClient client, Server server)
+        public TrinityRevoltChannel(string x, RevoltClient client)
         {
-            this.x = x;
-            this.client = client;
-            Channel = client.GetChannel(x);
-            if (Channel.Type == ChannelType.Text)
-            {
-                text = server.GetTextChannel(x);
-            }
-            else if (Channel.Type == ChannelType.Voice)
-            {
-                voice = server.GetVoiceChannel(x);
-            }
-
-            Server = server;
+            X = x;
+            Client = client;
+            Channel = Client.Channels.Get(x);
         }
 
-        public string? Name { get => text?.Name ?? voice?.Name; set => throw new NotImplementedException(); }
-        public TrinityGuid Id { get => new TrinityRevoltStringGuid(x); set => throw new NotImplementedException(); }
+        public string X { get; }
+        public RevoltClient Client { get; }
+        public Channel Channel { get; private set; }
+        public string? Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TrinityGuid Id { get => new TrinityRevoltStringGuid(X); set => throw new NotImplementedException(); }
         public TrinityChannelType Type { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string? Topic { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IList<ITrinityUser> Users { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -63,7 +50,7 @@ namespace Trinity.Revolt
 
         public async Task<ITrinityMessage> SendMessageAsync(string content)
         {
-            return new TrinityRevoltMessage(await text?.SendMessageAsync(content) ?? await voice?.SendMessageAsync(content));
+            return new TrinityRevoltMessage(await Channel.SendMessageAsync(content));
         }
 
         public Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed)

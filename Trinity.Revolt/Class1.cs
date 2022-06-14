@@ -1,32 +1,46 @@
-﻿using RevoltSharp;
+﻿using Revolt;
 using Trinity.Shared;
 
 namespace Trinity.Revolt
 {
     public class TrinityRevoltClient : IPlatformProvider
     {
-        public TrinityRevoltClient(RevoltClient client)
+        private readonly TokenType tokenType;
+        private readonly string token;
+
+        public TrinityRevoltClient(RevoltClient client, TokenType tokenType, string token)
         {
             Client = client;
+            this.tokenType = tokenType;
+            this.token = token;
+            Client.MessageReceived += Client_MessageReceived;
+        }
+
+        private async Task Client_MessageReceived(Message arg)
+        {
+            await MessageRecieved?.Invoke(this, new MessageRecievedArgs(new TrinityRevoltMessage(arg)));
         }
 
         public RevoltClient Client { get; private set; }
 
         public event AsyncEvent<IPlatformProvider, MessageRecievedArgs> MessageRecieved;
 
-        public Task ConnectAsync()
+        public async Task ConnectAsync()
         {
-            return Client.StartAsync();
+            await Client.LoginAsync(tokenType, token);
+            await Client.ConnectWebSocketAsync();
+            await Client.CacheAll();
         }
 
         public Task DisconnectAsync()
         {
-            return Client.StopAsync();
+            Client.DisconnectWebsocket();
+            return Task.CompletedTask;
         }
 
         public List<ITrinityGuild> GetCachedGuilds()
         {
-            return Client.Servers.Select(x => (ITrinityGuild)new TrinityRevoltGuild(x)).ToList();
+            return Client.ServersCache.Select(x => (ITrinityGuild)new TrinityRevoltGuild(x, Client)).ToList();
         }
 
         public Task<ITrinityChannel?> GetChannelAsync(TrinityGuid channelId)

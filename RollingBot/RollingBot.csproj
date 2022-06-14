@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SBTrinity.DiscordSharpPlus\Trinity.DiscordSharpPlus.csproj" />
+    <ProjectReference Include="..\Trinity.Revolt\Trinity.Revolt.csproj" />
   </ItemGroup>
 
 </Project>
