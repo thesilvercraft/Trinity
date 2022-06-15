@@ -10,11 +10,6 @@ namespace Trinity.Shared
     {
         public List<IPlatformProvider> Providers = new();
 
-        public TrinityBaseExtension(IPlatformProvider platform)
-        {
-            Providers.Add(platform);
-        }
-
         public TrinityBaseExtension(params IPlatformProvider[] platform)
         {
             Providers.AddRange(platform);

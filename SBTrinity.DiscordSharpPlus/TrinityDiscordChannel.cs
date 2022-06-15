@@ -16,8 +16,8 @@ namespace Trinity.DiscordSharpPlus
         public TrinityGuid Id { get => new TrinityUlongGuid(x.Id); set => throw new NotSupportedException("Changing the ID of a discord channel is not supported"); }
         public TrinityChannelType Type { get => x.Type.ToTrinityChannelType(); set => x.ModifyAsync(y => y.Type = value.ToDiscordChannelType()); }
         public string? Topic { get => x.Topic; set => x.ModifyAsync(y => y.Topic = value); }
-        public IList<ITrinityUser> Users { get => throw new NotImplementedException(); set => throw new NotSupportedException(); }
-        public IList<ITrinityMessage> PinnedMessages { get => throw new NotImplementedException(); set => throw new NotSupportedException(); }
+        public IList<ITrinityUser> Users { get => x.Users.Select(y => (ITrinityUser)new TrinityDiscordMember(y)).ToList(); set => throw new NotSupportedException(); }
+        public IList<ITrinityMessage> PinnedMessages { get => x.GetPinnedMessagesAsync().GetAwaiter().GetResult().Select(y => (ITrinityMessage)new TrinityDiscordMessage(y)).ToList(); set => throw new NotSupportedException(); }
 
         public Task<ITrinityChannel> GetChannelAsync(TrinityGuid channelId)
         {
@@ -58,14 +58,8 @@ namespace Trinity.DiscordSharpPlus
 
         public async Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed) => new TrinityDiscordMessage(await x.SendMessageAsync(embed.ToDiscordEmbed()));
 
-        public Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed) => new TrinityDiscordMessage(await x.SendMessageAsync(content, embed.ToDiscordEmbed()));
 
-        public Task TriggerTypingAsync()
-        {
-            return x.TriggerTypingAsync();
-        }
+        public Task TriggerTypingAsync() => x.TriggerTypingAsync();
     }
 }

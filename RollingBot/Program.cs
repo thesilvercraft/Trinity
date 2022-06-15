@@ -2,13 +2,14 @@
 using Trinity.Shared;
 using Trinity;
 using Trinity.Revolt;
+using Trinity.Commands;
 
 Console.WriteLine("ROLLING START!!!");
-TrinityDiscordClient client = new(new DSharpPlus.DiscordClient(new DSharpPlus.DiscordConfiguration() { Token = "" }));
+TrinityDiscordClient client = new(new DSharpPlus.DiscordClient(new DSharpPlus.DiscordConfiguration() { Token = Environment.GetEnvironmentVariable("trinityd") }));
 await client.ConnectAsync();
-TrinityRevoltClient rc = new(new(), Revolt.TokenType.Bot, "");
+TrinityRevoltClient rc = new(new(), Revolt.TokenType.Bot, Environment.GetEnvironmentVariable("trinityr"));
 await rc.ConnectAsync();
-
+CommandsExtension commandExt = new(client, rc);
 client.MessageRecieved += Client_MessageRecieved;
 rc.MessageRecieved += Client_MessageRecieved;
 

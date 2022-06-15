@@ -53,7 +53,7 @@ namespace Trinity.Commands
         /// <param name="embed">Embed to attach.</param>
         /// <returns></returns>
         public Task<ITrinityMessage> RespondAsync(TrinityEmbed embed)
-            => this.Message.RespondAsync(embed);
+            => Message.RespondAsync(embed);
 
         /// <summary>
         /// Quickly respond to the message that triggered the command.
@@ -62,7 +62,7 @@ namespace Trinity.Commands
         /// <param name="embed">Embed to attach.</param>
         /// <returns></returns>
         public Task<ITrinityMessage> RespondAsync(string content, TrinityEmbed embed)
-            => this.Message.RespondAsync(content, embed);
+            => Message.RespondAsync(content, embed);
 
         /// <summary>
         /// Quickly respond to the message that triggered the command.
@@ -70,7 +70,7 @@ namespace Trinity.Commands
         /// <param name="builder">The Discord Message builder.</param>
         /// <returns></returns>
         public Task<ITrinityMessage> RespondAsync(TrinityMessageBuilder builder)
-            => this.Message.RespondAsync(builder);
+            => Message.RespondAsync(builder);
 
         /// <summary>
         /// Triggers typing in the channel containing the message that triggered the command.
