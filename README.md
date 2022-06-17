@@ -3,7 +3,7 @@ Trinity is a sort of layer that sits between your bot's codebase and a wrapper f
 It aims to enable you to easily use common features implemented by trinity wrappers for wrappers for a given platform but if something is not implemented in a given trinity wrapper you can easily cast to a given trinity wrapper from the trinity interfaces to access the platform wrapper's functionalty directly.  
 Current support is in Proof Of Concept state and will be treated as such.  
 Basic methods such as ITrinityChannel.SendMessageAsync(string message) should be implemented.  
-
+DSharpPlus.CommandsNext (https://github.com/DSharpPlus/DSharpPlus/tree/master/DSharpPlus.CommandsNext) has been ported to trinity in a basic way.  
 
 By signing off to a commit of this repository you agree to the terms of the Developer Certificate of Origin which can be found at https://developercertificate.org and reads 
 ```
