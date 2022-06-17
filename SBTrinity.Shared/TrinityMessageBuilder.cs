@@ -158,7 +158,7 @@ namespace Trinity.Shared
         /// </summary>
         /// <param name="channel">The channel the message should be sent to.</param>
         /// <returns>The current builder to be chained.</returns>
-        public Task<ITrinityMessage> SendAsync(ITrinityChannel channel) => channel.SendMessageAsync(this);
+        public Task<ITrinityMessage> SendAsync(ITrinityChannelWithAdvancedSendingMethods channel) => channel.SendMessageAsync(this);
 
         /// <summary>
         /// Sends the modified message.

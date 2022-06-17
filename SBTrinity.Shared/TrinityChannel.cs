@@ -13,7 +13,7 @@
         /// <summary>
         /// The ID of the channel.
         /// </summary>
-        public TrinityGuid Id { get; set; }
+        public TrinityGuid Id { get; }
 
         /// <summary>
         /// The type of the channel.
@@ -28,30 +28,46 @@
         /// <summary>
         /// The list of users in the channel.
         /// </summary>
-        public IList<ITrinityUser> Users { get; set; }
+        public IList<ITrinityUser> Users { get; }
+
+        public ITrinityGuild? Guild { get; }
+        public bool IsNSFW { get; set; }
+        bool IsPrivate { get; }
 
         /// <summary>
         /// The list of messages in the channel.
         /// </summary>
-        public Task<IList<ITrinityMessage>> GetMessages(DateTime? before = null, DateTime? after = null, int? limit = null);
+        public Task<IList<ITrinityMessage>> GetMessages(TrinityGuid? before = null, TrinityGuid? after = null, int? limit = null);
 
-        /// <summary>
-        /// The list of pinned messages in the channel.
-        /// </summary>
-        public IList<ITrinityMessage> PinnedMessages { get; set; }
-
-        public Task<ITrinityChannel> GetChannelAsync(TrinityGuid channelId);
-
-        Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityDiscordMessage, TrinityMessageBuilder trinityMessageBuilder);
+        Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityDiscordMessage, string content);
 
         Task TriggerTypingAsync();
+
+        Task<ITrinityMessage> SendMessageAsync(string content);
+    }
+
+    public interface ITrinityChannelWithAdvancedSendingMethods : ITrinityChannel
+    {
+        Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed);
 
         Task<ITrinityMessage> SendMessageAsync(TrinityMessageBuilder trinityMessageBuilder);
 
         Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed);
 
-        Task<ITrinityMessage> SendMessageAsync(string content);
+        Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityDiscordMessage, TrinityMessageBuilder trinityMessageBuilder);
+    }
 
-        Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed);
+    public interface ITrinityChannelWithPinnedMessages : ITrinityChannel
+    {
+        /// <summary>
+        /// The list of pinned messages in the channel.
+        /// MAY BE NULL.
+        /// </summary>
+        public IList<ITrinityMessage> PinnedMessages { get; }
+    }
+
+    public interface ITrinityChannelWithSubChannels : ITrinityChannel
+    {
+        public Task<ITrinityChannel> GetChannelAsync(TrinityGuid channelId);
     }
 }

@@ -12,6 +12,11 @@ namespace Trinity.Shared
         {
             return Guid.Empty;
         }
+
+        public virtual string Mention()
+        {
+            return ToGuid().ToString();
+        }
     }
 
     public class TrinityUlongGuid : TrinityGuid
@@ -26,6 +31,11 @@ namespace Trinity.Shared
         public override Guid ToGuid()
         {
             return Value.ToGuid();
+        }
+
+        public override string Mention()
+        {
+            return $"<@!{Value}>";
         }
     }
 }

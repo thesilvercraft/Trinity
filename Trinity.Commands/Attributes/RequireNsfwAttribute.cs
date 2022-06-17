@@ -1,7 +1,7 @@
-﻿// This file contains a substantial modified portion of code made by the DSharpPlus project.
+// This file is part of the DSharpPlus project.
 //
 // Copyright (c) 2015 Mike Santiago
-// Copyright (c) 2016-2021 DSharpPlus Contributors
+// Copyright (c) 2016-2022 DSharpPlus Contributors
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +20,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-namespace Trinity.Commands
+
+using System;
+using System.Threading.Tasks;
+
+namespace Trinity.Commands.Attributes
 {
     /// <summary>
-    /// Represents a base for all command pre-execution check attributes.
+    /// Defines that usage of this command is restricted to NSFW channels.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public abstract class CheckBaseAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public sealed class RequireNsfwAttribute : CheckBaseAttribute
     {
-        /// <summary>
-        /// Asynchronously checks whether this command can be executed within given context.
-        /// </summary>
-        /// <param name="ctx">Context to check execution ability for.</param>
-        /// <param name="help">Whether this check is being executed from help or not. This can be used to probe whether command can be run without setting off certain fail conditions (such as cooldowns).</param>
-        /// <returns>Whether the command can be executed in given context.</returns>
-        public abstract Task<bool> ExecuteCheckAsync(CommandContext ctx, bool help);
+        public override Task<bool> ExecuteCheckAsync(CommandContext ctx, bool help)
+            => Task.FromResult(ctx.Channel.Guild == null || ctx.Channel.IsNSFW);
     }
 }

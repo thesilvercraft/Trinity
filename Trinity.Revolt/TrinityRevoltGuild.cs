@@ -13,7 +13,7 @@ namespace Trinity.Revolt
 
         public RevoltClient Client;
         public Server Guild { get; }
-        public TrinityGuid Id { get => new TrinityRevoltStringGuid(Guild._id); set => throw new NotSupportedException(); }
+        public TrinityGuid Id { get => new TrinityRevoltStringGuid(Guild._id); }
         public string? Name { get => Guild.Name; set => throw new NotSupportedException(); }
         public string? Description { get => Guild.Description; set => throw new NotSupportedException(); }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Trinity.Shared
 {
-    public class TrinityBaseExtension
+    public abstract class TrinityBaseExtension
     {
         public List<IPlatformProvider> Providers = new();
 
@@ -20,5 +20,7 @@ namespace Trinity.Shared
             Providers.Remove(platform);
             return Task.CompletedTask;
         }
+
+        public abstract void Setup(IPlatformProvider platform);
     }
 }

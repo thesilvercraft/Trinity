@@ -1,6 +1,7 @@
-﻿using DSharpPlus;
+﻿using Trinity;
 using DSharpPlus.Entities;
 using Trinity.Shared;
+using DSharpPlus;
 
 namespace Trinity.DiscordSharpPlus
 {

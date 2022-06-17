@@ -4,6 +4,8 @@ namespace Trinity
 {
     public interface IPlatformProvider
     {
+        ITrinityUser CurrentUser { get; }
+
         public Task ConnectAsync();
 
         public Task ReConnectAsync();
@@ -16,18 +18,6 @@ namespace Trinity
 
         public List<ITrinityGuild> GetCachedGuilds();
 
-        public event AsyncEvent<IPlatformProvider, MessageRecievedArgs> MessageRecieved;
-    }
-
-    public class MessageRecievedArgs : TrinityEventArgs
-    {
-        public MessageRecievedArgs(ITrinityMessage m)
-        {
-            Message = m;
-        }
-
-        public ITrinityMessage Message;
-        public ITrinityChannel Channel => Message.Channel;
-        public ITrinityUser Author => Message.Author;
+        public event AsyncEvent<IPlatformProvider, MessageCreatedEventArgs> MessageRecieved;
     }
 }

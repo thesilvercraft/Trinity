@@ -5,7 +5,7 @@
         /// <summary>
         /// The ID of the guild.
         /// </summary>
-        public TrinityGuid Id { get; set; }
+        public TrinityGuid Id { get; }
 
         /// <summary>
         /// The name of the guild.

@@ -1,5 +1,6 @@
-﻿using DSharpPlus;
+﻿using Trinity;
 using Trinity.Shared;
+using DSharpPlus;
 
 namespace Trinity.DiscordSharpPlus
 {
@@ -15,13 +16,15 @@ namespace Trinity.DiscordSharpPlus
         {
             if (MessageRecieved != null)
             {
-                await MessageRecieved.Invoke(this, new MessageRecievedArgs(new TrinityDiscordMessage(e.Message)));
+                await MessageRecieved.Invoke(this, new MessageCreatedEventArgs(new TrinityDiscordMessage(e.Message)));
             }
         }
 
         public DiscordClient client { get; set; }
 
-        public event AsyncEvent<IPlatformProvider, MessageRecievedArgs> MessageRecieved;
+        public ITrinityUser CurrentUser => new TrinityDiscordUser(client.CurrentUser);
+
+        public event AsyncEvent<IPlatformProvider, MessageCreatedEventArgs> MessageRecieved;
 
         public Task ConnectAsync() => client.ConnectAsync();
 

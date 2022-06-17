@@ -18,12 +18,14 @@ public class TrinityRevoltClient : IPlatformProvider
 
     private async Task Client_MessageReceived(Message arg)
     {
-        await MessageRecieved?.Invoke(this, new MessageRecievedArgs(new TrinityRevoltMessage(arg)));
+        await MessageRecieved?.Invoke(this, new MessageCreatedEventArgs(new TrinityRevoltMessage(arg, Client.Channels.Get(arg.ChannelId))));
     }
 
     public RevoltClient Client { get; private set; }
 
-    public event AsyncEvent<IPlatformProvider, MessageRecievedArgs> MessageRecieved;
+    public ITrinityUser CurrentUser => new TrinityRevoltUser(Client.User);
+
+    public event AsyncEvent<IPlatformProvider, MessageCreatedEventArgs> MessageRecieved;
 
     public async Task ConnectAsync()
     {

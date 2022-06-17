@@ -93,5 +93,5 @@ public class TrinityEmbed
     /// Gets the embed's fields.
     /// </summary>
 
-    public IReadOnlyList<TrinityEmbedField>? Fields { get; set; }
+    public List<TrinityEmbedField>? Fields { get; set; } = new();
 }

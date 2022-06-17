@@ -3,7 +3,7 @@ using Trinity.Shared;
 
 namespace Trinity.DiscordSharpPlus
 {
-    internal class TrinityDiscordChannel : ITrinityChannel
+    internal class TrinityDiscordChannel : ITrinityChannelWithPinnedMessages, ITrinityChannelWithAdvancedSendingMethods
     {
         private DiscordChannel x;
 
@@ -13,18 +13,19 @@ namespace Trinity.DiscordSharpPlus
         }
 
         public string? Name { get => x.Name; set => x.ModifyAsync(y => y.Name = value); }
-        public TrinityGuid Id { get => new TrinityUlongGuid(x.Id); set => throw new NotSupportedException("Changing the ID of a discord channel is not supported"); }
+        public TrinityGuid Id { get => new TrinityUlongGuid(x.Id); }
         public TrinityChannelType Type { get => x.Type.ToTrinityChannelType(); set => x.ModifyAsync(y => y.Type = value.ToDiscordChannelType()); }
         public string? Topic { get => x.Topic; set => x.ModifyAsync(y => y.Topic = value); }
-        public IList<ITrinityUser> Users { get => x.Users.Select(y => (ITrinityUser)new TrinityDiscordMember(y)).ToList(); set => throw new NotSupportedException(); }
-        public IList<ITrinityMessage> PinnedMessages { get => x.GetPinnedMessagesAsync().GetAwaiter().GetResult().Select(y => (ITrinityMessage)new TrinityDiscordMessage(y)).ToList(); set => throw new NotSupportedException(); }
+        public IList<ITrinityUser> Users { get => x.Users.Select(y => (ITrinityUser)new TrinityDiscordMember(y)).ToList(); }
+        public IList<ITrinityMessage> PinnedMessages { get => x.GetPinnedMessagesAsync().GetAwaiter().GetResult().Select(y => (ITrinityMessage)new TrinityDiscordMessage(y)).ToList(); }
 
-        public Task<ITrinityChannel> GetChannelAsync(TrinityGuid channelId)
-        {
-            throw new NotSupportedException("Discord does not support getting channels from a channel");
-        }
+        public ITrinityGuild? Guild => x.Guild == null ? null : new TrinityDiscordGuild(x.Guild);
 
-        public async Task<IList<ITrinityMessage>> GetMessages(DateTime? before = null, DateTime? after = null, int? limit = null)
+        public bool IsNSFW { get => x.IsNSFW; set => throw new NotImplementedException(); }
+
+        public bool IsPrivate => x.IsPrivate;
+
+        public async Task<IList<ITrinityMessage>> GetMessages(TrinityGuid? before = null, TrinityGuid? after = null, int? limit = null)
         {
             if (before == null && after == null && limit == null)
             {
@@ -50,6 +51,11 @@ namespace Trinity.DiscordSharpPlus
         public async Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityDiscordMessage, TrinityMessageBuilder trinityMessageBuilder)
         {
             return new TrinityDiscordMessage(await ((TrinityDiscordMessage)trinityDiscordMessage).X.ModifyAsync(trinityMessageBuilder.ToDiscordMessageBuilder()));
+        }
+
+        public async Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityDiscordMessage, string content)
+        {
+            return new TrinityDiscordMessage(await ((TrinityDiscordMessage)trinityDiscordMessage).X.ModifyAsync(content));
         }
 
         public async Task<ITrinityMessage> SendMessageAsync(TrinityMessageBuilder trinityMessageBuilder) => new TrinityDiscordMessage(await x.SendMessageAsync(trinityMessageBuilder.ToDiscordMessageBuilder()));

@@ -10,7 +10,7 @@ namespace Trinity.DiscordSharpPlus
             Guild = guild ?? throw new ArgumentNullException(nameof(guild));
         }
 
-        public TrinityGuid Id { get => new TrinityUlongGuid(Guild.Id); set => throw new NotSupportedException(); }
+        public TrinityGuid Id { get => new TrinityUlongGuid(Guild.Id); }
         public string? Name { get => Guild.Name; set => Guild.ModifyAsync(y => y.Name = value); }
         public string? Description { get => Guild.Description; set => Guild.ModifyAsync(y => y.Description = value); }
 

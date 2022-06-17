@@ -1,7 +1,7 @@
-﻿// This file contains a substantial modified portion of code made by the DSharpPlus project.
+// This file is part of the DSharpPlus project.
 //
 // Copyright (c) 2015 Mike Santiago
-// Copyright (c) 2016-2021 DSharpPlus Contributors
+// Copyright (c) 2016-2022 DSharpPlus Contributors
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,23 +20,34 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-namespace Trinity.Commands
+
+using Emzi0767;
+using System;
+using System.Threading.Tasks;
+
+namespace Trinity.Commands.Converters
 {
-    public class Command
+    public class StringConverter : IArgumentConverter<string>
     {
-        public string[] Names { get; set; } = new[] { string.Empty };
-        public string? Description { get; set; }
-        public string? Usage { get; set; }
-        public string? Help { get; set; }
-        public string? Category { get; set; }
-        public bool Hidden { get; set; }
+        Task<Optional<string>> IArgumentConverter<string>.ConvertAsync(string value, CommandContext ctx)
+            => Task.FromResult(Optional.FromValue(value));
+    }
 
-        public IReadOnlyList<CommandOverload> Overloads { get; internal set; } = Array.Empty<CommandOverload>();
-        public IReadOnlyList<CheckBaseAttribute> ExecutionChecks { get; internal set; } = Array.Empty<CheckBaseAttribute>();
-
-        public virtual async Task<bool> Execute(CommandContext ctx, string[] args)
+    public class UriConverter : IArgumentConverter<Uri>
+    {
+        Task<Optional<Uri>> IArgumentConverter<Uri>.ConvertAsync(string value, CommandContext ctx)
         {
-            return await Task.FromResult(false);
+            try
+            {
+                if (value.StartsWith("<") && value.EndsWith(">"))
+                    value = value.Substring(1, value.Length - 2);
+
+                return Task.FromResult(Optional.FromValue(new Uri(value)));
+            }
+            catch
+            {
+                return Task.FromResult(Optional.FromNoValue<Uri>());
+            }
         }
     }
 }

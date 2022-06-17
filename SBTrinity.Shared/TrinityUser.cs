@@ -2,8 +2,8 @@
 {
     public interface ITrinityUser
     {
-        public TrinityGuid Id { get; set; }
-        public string? Name { get; set; }
-        public bool IsAutomated { get; set; }
+        public TrinityGuid Id { get; }
+        public string? Name { get; }
+        public bool IsAutomated { get; }
     }
 }

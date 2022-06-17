@@ -11,15 +11,17 @@ namespace Trinity.DiscordSharpPlus
         }
 
         public DiscordMessage X { get; }
-        public TrinityGuid Id { get => new TrinityUlongGuid(X.Id); set => throw new NotSupportedException("You can not change the id of a message"); }
+        public TrinityGuid Id { get => new TrinityUlongGuid(X.Id); }
 
         public ITrinityUser Author => new TrinityDiscordUser(X.Author);
 
         public string? PlainTextMessage { get => X.Content; set => X.ModifyAsync(y => y.Content = value); }
-        public DateTime? Timestamp { get => X.Timestamp.UtcDateTime; set => throw new NotSupportedException("Editing of a timestamp is not supported"); }
-        public ITrinityChannel Channel { get => new TrinityDiscordChannel(X.Channel); set => throw new NotSupportedException("You cant transfer a message from a channel to a different one"); }
+        public DateTime? Timestamp { get => X.Timestamp.UtcDateTime; }
+        public ITrinityChannel Channel { get => new TrinityDiscordChannel(X.Channel); }
         public List<TrinityEmbed>? Embeds { get => TrinityDiscordEmbed.CreateFromDiscordEmbedListAsTrinityEmbed(X.Embeds); set => throw new NotSupportedException("You can not change the embeds of an already sent message for now (TODO)"); }
-        public List<Mention> Mentions { get => GetMentions(); set => throw new NotSupportedException("You can not explicitly change the mentions of a message for now"); }
+        public List<Mention> Mentions { get => GetMentions(); }
+
+        public ITrinityMessage? ReferencedMessage => X.ReferencedMessage == null ? null : new TrinityDiscordMessage(X.ReferencedMessage);
 
         private List<Mention> GetMentions()
         {
@@ -41,17 +43,11 @@ namespace Trinity.DiscordSharpPlus
 
         public Task<ITrinityMessage> ModifyAsync(TrinityMessageBuilder trinityMessageBuilder)
         {
-            return Channel.ModifyAsync(this, trinityMessageBuilder);
-        }
-
-        public Task<ITrinityMessage> RespondAsync(string content, TrinityEmbed embed)
-        {
-            return Channel.SendMessageAsync(content, embed);
-        }
-
-        public Task<ITrinityMessage> RespondAsync(TrinityEmbed embed)
-        {
-            return Channel.SendMessageAsync(embed);
+            if (Channel is ITrinityChannelWithAdvancedSendingMethods c)
+            {
+                return c.ModifyAsync(this, trinityMessageBuilder);
+            }
+            return null;
         }
 
         public Task<ITrinityMessage> RespondAsync(string content)
@@ -59,9 +55,36 @@ namespace Trinity.DiscordSharpPlus
             return Channel.SendMessageAsync(content);
         }
 
-        public Task<ITrinityMessage> RespondAsync(TrinityMessageBuilder builder)
+        public Task<ITrinityMessage>? RespondAsync(TrinityMessageBuilder builder)
         {
-            return Channel.SendMessageAsync(builder);
+            if (Channel is ITrinityChannelWithAdvancedSendingMethods c)
+            {
+                return c.SendMessageAsync(builder);
+            }
+            return null;
+        }
+
+        public Task<ITrinityMessage> ModifyAsync(string content)
+        {
+            return Channel.ModifyAsync(this, content);
+        }
+
+        public Task<ITrinityMessage>? RespondAsync(TrinityEmbed embed)
+        {
+            if (Channel is ITrinityChannelWithAdvancedSendingMethods c)
+            {
+                return c.SendMessageAsync(embed);
+            }
+            return null;
+        }
+
+        public Task<ITrinityMessage>? RespondAsync(string content, TrinityEmbed embed)
+        {
+            if (Channel is ITrinityChannelWithAdvancedSendingMethods c)
+            {
+                return c.SendMessageAsync(content, embed);
+            }
+            return null;
         }
     }
 }

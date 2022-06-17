@@ -24,6 +24,13 @@ namespace Trinity.Shared;
 
 public class TrinityEmbedField
 {
+    public TrinityEmbedField(string n, string v, bool i)
+    {
+        Name = n;
+        Value = v;
+        Inline = i;
+    }
+
     /// <summary>
     /// Gets the name of the field.
     /// </summary>

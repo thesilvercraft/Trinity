@@ -1,4 +1,5 @@
 ﻿using Revolt;
+using Revolt.Channels;
 using Trinity.Shared;
 
 namespace Trinity.Revolt
@@ -16,9 +17,13 @@ namespace Trinity.Revolt
         public List<TrinityEmbed>? Embeds { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public List<Mention> Mentions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public TrinityRevoltMessage(Message message)
+        public ITrinityMessage? ReferencedMessage => throw new NotImplementedException();
+        private Channel channel;
+
+        public TrinityRevoltMessage(Message message, Channel c)
         {
             Message = message;
+            channel = c;
         }
 
         public Task<ITrinityMessage> RespondAsync(string content, TrinityEmbed embed)
@@ -31,9 +36,9 @@ namespace Trinity.Revolt
             throw new NotImplementedException();
         }
 
-        public Task<ITrinityMessage> RespondAsync(string content)
+        public async Task<ITrinityMessage> RespondAsync(string content)
         {
-            throw new NotImplementedException();
+            return new TrinityRevoltMessage(await channel.SendMessageAsync(content), channel);
         }
 
         public Task<ITrinityMessage> ModifyAsync(TrinityMessageBuilder trinityMessageBuilder)
@@ -42,6 +47,11 @@ namespace Trinity.Revolt
         }
 
         public Task<ITrinityMessage> RespondAsync(TrinityMessageBuilder builder)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ITrinityMessage> ModifyAsync(string content)
         {
             throw new NotImplementedException();
         }
