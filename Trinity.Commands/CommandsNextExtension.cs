@@ -93,41 +93,32 @@ namespace Trinity.Commands
                 [typeof(TrinityColor)] = new TrinityColorConverter()
                 }}
             };
-            //[typeof(DiscordUser)] = new DiscordUserConverter(),
-            //[typeof(DiscordMember)] = new DiscordMemberConverter(),
-            //[typeof(DiscordRole)] = new DiscordRoleConverter(),
-            //[typeof(DiscordChannel)] = new DiscordChannelConverter(),
-            // [typeof(DiscordThreadChannel)] = new DiscordThreadChannelConverter(),
-            // [typeof(DiscordGuild)] = new DiscordGuildConverter(),
-            //[typeof(DiscordMessage)] = new DiscordMessageConverter(),
-            //[typeof(DiscordEmoji)] = new DiscordEmojiConverter(),
+
             UserFriendlyTypeNames = new Dictionary<Type, Dictionary<Type, string>>()
             {
                 {typeof(IPlatformProvider), new Dictionary<Type, string>
                 {
-                    [typeof(string)] = "string",
-                    [typeof(bool)] = "boolean",
-                    [typeof(sbyte)] = "signed byte",
-                    [typeof(byte)] = "byte",
-                    [typeof(short)] = "short",
-                    [typeof(ushort)] = "unsigned short",
-                    [typeof(int)] = "int",
-                    [typeof(uint)] = "unsigned int",
-                    [typeof(long)] = "long",
-                    [typeof(ulong)] = "unsigned long",
-                    [typeof(float)] = "float",
-                    [typeof(double)] = "double",
-                    [typeof(decimal)] = "decimal",
+                    [typeof(string)] = "string (text, seperate strings by using quotatin marks, example: examplecommand \"1\" \"2\" \"3\" \"etc\")",
+                    [typeof(bool)] = "boolean (true(yes) or false(no))",
+                    [typeof(sbyte)] = $"signed byte ({sbyte.MinValue} to {sbyte.MaxValue})",
+                    [typeof(byte)] = $"byte ({byte.MinValue} to {byte.MaxValue})",
+                    [typeof(short)] = $"short ({short.MinValue} to {short.MaxValue})",
+                    [typeof(ushort)] = $"unsigned short ({ushort.MinValue} to {ushort.MaxValue})",
+                    [typeof(int)] = $"int ({int.MinValue} to {int.MaxValue})",
+                    [typeof(uint)] = $"unsigned int ({uint.MinValue} to {uint.MaxValue})",
+                    [typeof(long)] = $"long ({long.MinValue} to {long.MaxValue})",
+                    [typeof(ulong)] = $"unsigned long ({ulong.MinValue} to {ulong.MinValue})",
+                    [typeof(float)] = $"float ({float.MinValue} to {float.MaxValue})",
+                    [typeof(double)] = $"double ({double.MinValue} to {double.MaxValue}, supports + and - infinity)",
+                    [typeof(decimal)] = $"decimal ({decimal.MinValue} to {decimal.MaxValue})",
                     [typeof(DateTime)] = "date and time",
                     [typeof(DateTimeOffset)] = "date and time",
-                    [typeof(TimeSpan)] = "time span",
-                    [typeof(Uri)] = "URL",
+                    [typeof(TimeSpan)] = "time span (duration, example: 1h30m)",
+                    [typeof(Uri)] = "URL (link, example: https://example.com)",
                     [typeof(ITrinityUser)] = "user",
-                    //[typeof(ITrinityRole)] = "role",
                     [typeof(ITrinityChannel)] = "channel",
                     [typeof(ITrinityGuild)] = "guild",
                     [typeof(ITrinityMessage)] = "message",
-                    // [typeof(ITrinityEmoji)] = "emoji",
                     [typeof(TrinityColor)] = "color"
                 }}
             };
