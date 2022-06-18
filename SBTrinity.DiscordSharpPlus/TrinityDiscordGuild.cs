@@ -22,6 +22,6 @@ namespace Trinity.DiscordSharpPlus
         }
 
         public ITrinityUser Owner { get => new TrinityDiscordMember(Guild.Owner); set => Guild.ModifyAsync(y => y.Owner = ((TrinityDiscordMember)value).Member); }
-        private DiscordGuild Guild { get; set; }
+        public DiscordGuild Guild { get; internal set; }
     }
 }

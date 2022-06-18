@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Trinity.Commands;
 using Trinity.Commands.Attributes;
 
-namespace RollingBot
+namespace RollingBot.Commands
 {
     internal class TestCommandModule : BaseCommandModule
     {

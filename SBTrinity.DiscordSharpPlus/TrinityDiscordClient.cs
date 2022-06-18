@@ -56,5 +56,14 @@ namespace Trinity.DiscordSharpPlus
         {
             return client.Guilds.Values.Select(x => (ITrinityGuild)new TrinityDiscordGuild(x)).ToList();
         }
+
+        public Task<bool> IsOwnerAsync(TrinityGuid id)
+        {
+            if (id is TrinityUlongGuid uid)
+            {
+                return Task.FromResult(client.CurrentApplication.Owners.Any(x => x.Id == uid.Value));
+            }
+            throw new NotSupportedException($"The current implementation of {nameof(TrinityDiscordClient)}.{nameof(IsOwnerAsync)} does not support accepting a {id.GetType()} as an input paramater try using a TrinityUlongGuid instead");
+        }
     }
 }

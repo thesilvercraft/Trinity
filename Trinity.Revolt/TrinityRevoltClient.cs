@@ -60,4 +60,13 @@ public class TrinityRevoltClient : IPlatformProvider
         Client.DisconnectWebsocket();
         return Client.ConnectWebSocketAsync();
     }
+
+    public Task<bool> IsOwnerAsync(TrinityGuid id)
+    {
+        if (id is TrinityRevoltStringGuid s)
+        {
+            return Task.FromResult(Client.User.Bot.OwnerId == s.Value);
+        }
+        return Task.FromResult(false);
+    }
 }

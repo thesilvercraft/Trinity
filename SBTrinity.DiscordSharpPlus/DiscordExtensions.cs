@@ -116,10 +116,7 @@ namespace Trinity.DiscordSharpPlus
             {
                 builder.Content = messageBuilder.Content;
             }
-            if (messageBuilder.Embed != null)
-            {
-                builder.Embed = messageBuilder.Embed.ToDiscordEmbed();
-            }
+          
             if (messageBuilder.Embeds.Any())
             {
                 foreach (var embed in messageBuilder.Embeds)
@@ -139,6 +136,13 @@ namespace Trinity.DiscordSharpPlus
             if (messageBuilder.ReplyId != null)
             {
                 builder.WithReply(((TrinityUlongGuid)messageBuilder.ReplyId).Value);
+            }
+            if (messageBuilder.Files.Any())
+            {
+                foreach (var file in messageBuilder.Files)
+                {
+                    builder.WithFile(file.FileName, file.Stream, file.ResetPositionTo == 0);
+                }
             }
             builder.IsTTS = messageBuilder.IsTTS;
 

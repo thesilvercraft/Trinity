@@ -48,7 +48,7 @@ namespace Trinity.Revolt
 
         public Task<ITrinityMessage> RespondAsync(TrinityMessageBuilder builder)
         {
-            throw new NotImplementedException();
+            return builder.SendAsync(new TrinityRevoltChannel(channel));
         }
 
         public Task<ITrinityMessage> ModifyAsync(string content)

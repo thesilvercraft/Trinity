@@ -19,5 +19,7 @@ namespace Trinity
         public List<ITrinityGuild> GetCachedGuilds();
 
         public event AsyncEvent<IPlatformProvider, MessageCreatedEventArgs> MessageRecieved;
+
+        Task<bool> IsOwnerAsync(TrinityGuid id);
     }
 }

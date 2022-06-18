@@ -1,4 +1,4 @@
-// This file is part of the DSharpPlus project.
+﻿// This file contains parts of a file of the DSharpPlus project.
 //
 // Copyright (c) 2015 Mike Santiago
 // Copyright (c) 2016-2022 DSharpPlus Contributors
@@ -20,22 +20,30 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
-
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Trinity.Commands.Attributes
+namespace Trinity.Shared
 {
-    /// <summary>
-    /// Defines that usage of this command is restricted to the owner of the bot.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class RequireOwnerAttribute : CheckBaseAttribute
+    public class TrinityMessageFile
     {
-        public override Task<bool> ExecuteCheckAsync(CommandContext ctx, bool help)
+        public TrinityMessageFile(string fileName, Stream stream, long? resetPositionTo)
         {
-            return ctx.Client.IsOwnerAsync(ctx.User.Id);
+            FileName = fileName ?? "file";
+            Stream = stream;
+            ResetPositionTo = resetPositionTo;
         }
+
+        /// <summary>
+        /// Gets the FileName of the File.
+        /// </summary>
+        public string FileName { get; internal set; }
+
+        /// <summary>
+        /// Gets the stream of the File.
+        /// </summary>
+        public Stream Stream { get; internal set; }
+
+        /// <summary>
+        /// Gets the position the File should be reset to.
+        /// </summary>
+        public long? ResetPositionTo { get; set; }
     }
 }

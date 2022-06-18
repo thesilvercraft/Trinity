@@ -54,26 +54,26 @@ namespace Trinity.Commands
         /// <para>Sets the string prefixes used for commands.</para>
         /// <para>Defaults to no value (disabled).</para>
         /// </summary>
-        public IEnumerable<string> StringPrefixes { internal get; set; } = Enumerable.Empty<string>();
+        public IEnumerable<string> StringPrefixes { get; set; } = Enumerable.Empty<string>();
 
         /// <summary>
         /// <para>Sets the custom prefix resolver used for commands.</para>
         /// <para>Defaults to none (disabled).</para>
         /// </summary>
-        public PrefixResolverDelegate? PrefixResolver { internal get; set; } = null;
+        public PrefixResolverDelegate? PrefixResolver { get; set; } = null;
 
         /// <summary>
         /// <para>Sets whether to allow mentioning the bot to be used as command prefix.</para>
         /// <para>Defaults to true.</para>
         /// </summary>
-        public bool EnableMentionPrefix { internal get; set; } = true;
+        public bool EnableMentionPrefix { get; set; } = true;
 
         /// <summary>
         /// <para>Sets whether strings should be matched in a case-sensitive manner.</para>
         /// <para>This switch affects the behaviour of default prefix resolver, command searching, and argument conversion.</para>
         /// <para>Defaults to false.</para>
         /// </summary>
-        public bool CaseSensitive { internal get; set; } = false;
+        public bool CaseSensitive { get; set; } = false;
 
         /// <summary>
         /// <para>Sets whether to enable default help command.</para>
@@ -84,59 +84,59 @@ namespace Trinity.Commands
         /// </para>
         /// <para>Defaults to true.</para>
         /// </summary>
-        public bool EnableDefaultHelp { internal get; set; } = true;
+        public bool EnableDefaultHelp { get; set; } = true;
 
         /// <summary>
         /// <para>Controls whether the default help will be sent via DMs or not.</para>
         /// <para>Enabling this will make the bot respond with help via direct messages.</para>
         /// <para>Defaults to false.</para>
         /// </summary>
-        public bool DmHelp { internal get; set; } = false;
+        public bool DmHelp { get; set; } = false;
 
         /// <summary>
         /// <para>Sets the default pre-execution checks for the built-in help command.</para>
         /// <para>Only applicable if default help is enabled.</para>
         /// <para>Defaults to null.</para>
         /// </summary>
-        public IEnumerable<CheckBaseAttribute> DefaultHelpChecks { internal get; set; } = Enumerable.Empty<CheckBaseAttribute>();
+        public IEnumerable<CheckBaseAttribute> DefaultHelpChecks { get; set; } = Enumerable.Empty<CheckBaseAttribute>();
 
         /// <summary>
         /// <para>Sets whether commands sent via direct messages should be processed.</para>
         /// <para>Defaults to true.</para>
         /// </summary>
-        public bool EnableDms { internal get; set; } = true;
+        public bool EnableDms { get; set; } = true;
 
         /// <summary>
         /// <para>Sets the service provider for this CommandsNext instance.</para>
         /// <para>Objects in this provider are used when instantiating command modules. This allows passing data around without resorting to static members.</para>
         /// <para>Defaults to null.</para>
         /// </summary>
-        public IServiceProvider Services { internal get; set; } = new ServiceCollection().BuildServiceProvider(true);
+        public IServiceProvider Services { get; set; } = new ServiceCollection().BuildServiceProvider(true);
 
         /// <summary>
         /// <para>Gets whether any extra arguments passed to commands should be ignored or not. If this is set to false, extra arguments will throw, otherwise they will be ignored.</para>
         /// <para>Defaults to false.</para>
         /// </summary>
-        public bool IgnoreExtraArguments { internal get; set; } = false;
+        public bool IgnoreExtraArguments { get; set; } = false;
 
         /// <summary>
         /// <para>Sets the quotation marks on parameters, used to interpret spaces as part of a single argument.</para>
         /// <para>Defaults to a collection of <c>"</c>, <c>«</c>, <c>»</c>, <c>‘</c>, <c>“</c>, <c>„</c> and <c>‟</c>.</para>
         /// </summary>
-        public IEnumerable<char> QuotationMarks { internal get; set; } = new[] { '"', '«', '»', '‘', '“', '„', '‟' };
+        public IEnumerable<char> QuotationMarks { get; set; } = new[] { '"', '«', '»', '‘', '“', '„', '‟' };
 
         /// <summary>
         /// <para>Gets or sets whether to automatically enable handling commands.</para>
         /// <para>If this is set to false, you will need to manually handle each incoming message and pass it to CommandsNext.</para>
         /// <para>Defaults to true.</para>
         /// </summary>
-        public bool UseDefaultCommandHandler { internal get; set; } = true;
+        public bool UseDefaultCommandHandler { get; set; } = true;
 
         /// <summary>
         /// <para>Gets or sets the default culture for parsers.</para>
         /// <para>Defaults to invariant.</para>
         /// </summary>
-        public CultureInfo DefaultParserCulture { internal get; set; } = CultureInfo.InvariantCulture;
+        public CultureInfo DefaultParserCulture { get; set; } = CultureInfo.InvariantCulture;
 
         /// <summary>
         /// <para>Gets or sets the default command exector.</para>

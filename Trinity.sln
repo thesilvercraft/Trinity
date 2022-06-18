@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.DiscordSharpPlus", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Commands", "Trinity.Commands\Trinity.Commands.csproj", "{1A16B652-39F3-4FD0-8AB0-E05195F431EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.Revolt", "Trinity.Revolt\Trinity.Revolt.csproj", "{B677C3B3-42EF-4939-82AF-CB488B96070B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Revolt", "Trinity.Revolt\Trinity.Revolt.csproj", "{B677C3B3-42EF-4939-82AF-CB488B96070B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.DSharpPlus.Commands", "Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj", "{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B677C3B3-42EF-4939-82AF-CB488B96070B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B677C3B3-42EF-4939-82AF-CB488B96070B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B677C3B3-42EF-4939-82AF-CB488B96070B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

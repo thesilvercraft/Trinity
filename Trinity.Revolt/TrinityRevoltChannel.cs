@@ -4,13 +4,20 @@ using Trinity.Shared;
 
 namespace Trinity.Revolt
 {
-    internal class TrinityRevoltChannel : ITrinityChannel
+    internal class TrinityRevoltChannel : ITrinityChannel, ITrinityChannelWithAdvancedSendingMethods
     {
         public TrinityRevoltChannel(string x, RevoltClient client)
         {
             X = x;
             Client = client;
             Channel = Client.Channels.Get(x);
+        }
+
+        public TrinityRevoltChannel(Channel c)
+        {
+            X = c._id;
+            Client = c.Client;
+            Channel = c;
         }
 
         public string X { get; }
@@ -23,7 +30,7 @@ namespace Trinity.Revolt
         public IList<ITrinityUser> Users { get => Channel.GetMembersAsync().GetAwaiter().GetResult().Select(y => (ITrinityUser)new TrinityRevoltUser(y)).ToList(); }
         public IList<ITrinityMessage> PinnedMessages { get => throw new NotSupportedException("NOP"); }
 
-        public ITrinityGuild? Guild => throw new NotImplementedException();
+        public ITrinityGuild? Guild => null;
 
         public bool IsNSFW { get => false; set => throw new NotImplementedException(); }
 
@@ -52,6 +59,55 @@ namespace Trinity.Revolt
         public Task TriggerTypingAsync()
         {
             return Channel.BeginTypingAsync();
+        }
+
+        private byte[] StreamToByteArray(Stream sourceStream, long ResetPos)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                sourceStream.CopyTo(memoryStream);
+                sourceStream.Position = ResetPos;
+                return memoryStream.ToArray();
+            }
+        }
+
+        public async Task<ITrinityMessage> SendMessageAsync(TrinityMessageBuilder trinityMessageBuilder)
+        {
+            List<string> fileitems = new();
+            SelfMessage message = null;
+            if (trinityMessageBuilder.Files.Any())
+            {
+                foreach (var file in trinityMessageBuilder.Files)
+                {
+                    fileitems.Add(await Client.UploadFile(file.FileName, StreamToByteArray(file.Stream, file.ResetPositionTo ?? 0)));
+                }
+                for (int f = 0; f < fileitems.Count; f++)
+                {
+                    if (f == 0)
+                    {
+                        message = await Channel.SendMessageAsync(trinityMessageBuilder.Content, fileitems[f]);
+                    }
+                    else
+                    {
+                        message = await Channel.SendMessageAsync("^", fileitems[f]);
+                    }
+                }
+            }
+            else
+            {
+                message = await Channel.SendMessageAsync(trinityMessageBuilder.Content);
+            }
+            return new TrinityRevoltMessage(message, Channel);
+        }
+
+        public Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed)
+        {
+            throw new NotImplementedException("NOP");
+        }
+
+        public Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityMessage, TrinityMessageBuilder trinityMessageBuilder)
+        {
+            throw new NotImplementedException("NOP");
         }
     }
 

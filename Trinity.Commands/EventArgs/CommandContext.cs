@@ -107,7 +107,7 @@ namespace Trinity.Commands
         /// </summary>
         public string Prefix { get; internal set; } = string.Empty;
 
-        internal CommandsNextConfiguration Config { get; set; } = null!;
+        public CommandsNextConfiguration Config { get; internal set; } = null!;
 
         internal ServiceContext ServiceScopeContext { get; set; }
 
