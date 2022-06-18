@@ -926,7 +926,7 @@ namespace Trinity.Commands
         {
             if (converter is null)
                 throw new ArgumentNullException(nameof(converter), "Converter cannot be null.");
-            if (clienttype != typeof(IPlatformProvider) && !clienttype.GetTypeInfo().IsAssignableFrom(typeof(IPlatformProvider).Ge‌​tTypeInfo()))
+            if (clienttype != typeof(IPlatformProvider) && !clienttype.GetInterfaces().Contains(typeof(IPlatformProvider)))
             {
                 throw new ArgumentException("Client type must be of type IPlatformProvider.", nameof(clienttype));
             }
@@ -987,13 +987,13 @@ namespace Trinity.Commands
         {
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentNullException(nameof(value), "Name cannot be null or empty.");
-            if (clienttype != typeof(IPlatformProvider) && !clienttype.GetTypeInfo().IsAssignableFrom(typeof(IPlatformProvider).Ge‌​tTypeInfo()))
+            if (clienttype != typeof(IPlatformProvider) && !clienttype.GetInterfaces().Contains(typeof(IPlatformProvider)))
             {
                 throw new ArgumentException("Client type must be of type IPlatformProvider.", nameof(clienttype));
             }
             var t = typeof(T);
             var ti = t.GetTypeInfo();
-            if (!ArgumentConverters.ContainsKey(t))
+            if (!ArgumentConverters.ContainsKey(clienttype) || !ArgumentConverters[clienttype].ContainsKey(t))
                 throw new InvalidOperationException("Cannot register a friendly name for a type which has no associated converter.");
             if (!UserFriendlyTypeNames.ContainsKey(clienttype))
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Trinity.DiscordSharpPlus
 {
-    internal class TrinityDiscordEmbed : TrinityEmbed
+    public class TrinityDiscordEmbed : TrinityEmbed
     {
         private DiscordEmbed x;
 

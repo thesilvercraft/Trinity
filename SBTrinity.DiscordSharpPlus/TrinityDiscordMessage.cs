@@ -3,7 +3,7 @@ using Trinity.Shared;
 
 namespace Trinity.DiscordSharpPlus
 {
-    internal class TrinityDiscordMessage : ITrinityMessage
+    public class TrinityDiscordMessage : ITrinityMessage
     {
         public TrinityDiscordMessage(DiscordMessage x)
         {

@@ -3,9 +3,9 @@ using Trinity.Shared;
 
 namespace Trinity.DiscordSharpPlus
 {
-    internal class TrinityDiscordChannel : ITrinityChannelWithPinnedMessages, ITrinityChannelWithAdvancedSendingMethods
+    public class TrinityDiscordChannel : ITrinityChannelWithPinnedMessages, ITrinityChannelWithAdvancedSendingMethods
     {
-        private DiscordChannel x;
+        public DiscordChannel x { get; internal set; }
 
         public TrinityDiscordChannel(DiscordChannel x)
         {

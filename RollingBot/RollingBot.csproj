@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SBTrinity.DiscordSharpPlus\Trinity.DiscordSharpPlus.csproj" />
     <ProjectReference Include="..\Trinity.Commands\Trinity.Commands.csproj" />
+    <ProjectReference Include="..\Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj" />
     <ProjectReference Include="..\Trinity.Revolt\Trinity.Revolt.csproj" />
   </ItemGroup>
 

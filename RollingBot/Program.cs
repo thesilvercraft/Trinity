@@ -5,6 +5,7 @@ using Trinity.Revolt;
 using Trinity.Commands;
 using RollingBot.Commands;
 using RollingBot.Commands.EvaluateCode;
+using Trinity.DSharpPlus.Commands;
 
 Console.WriteLine("ROLLING START!!!");
 TrinityDiscordClient client = new(new DSharpPlus.DiscordClient(new DSharpPlus.DiscordConfiguration() { Token = Environment.GetEnvironmentVariable("trinityd") }));
@@ -21,7 +22,7 @@ cn.Setup(client);
 cn.Setup(rc);
 cn.RegisterCommands<TestCommandModule>();
 cn.RegisterCommands<CodeEnvCommandModule>();
-
+cn.RegisterDiscordConverters();
 async Task Client_MessageRecieved(IPlatformProvider sender, MessageCreatedEventArgs e)
 {
     if (!e.Message.Author.IsAutomated && e.Message.PlainTextMessage.StartsWith("hey"))
