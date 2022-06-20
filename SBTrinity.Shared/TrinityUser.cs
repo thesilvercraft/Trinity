@@ -5,5 +5,6 @@
         public TrinityGuid Id { get; }
         public string? Name { get; }
         public bool IsAutomated { get; }
+        string Mention { get; }
     }
 }

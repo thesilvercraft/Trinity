@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RollingBot.SB.Modules.ImageModule\RollingBot.SB.Modules.ImageModule.csproj" />
     <ProjectReference Include="..\SBTrinity.DiscordSharpPlus\Trinity.DiscordSharpPlus.csproj" />
     <ProjectReference Include="..\Trinity.Commands\Trinity.Commands.csproj" />
     <ProjectReference Include="..\Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj" />

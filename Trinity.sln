@@ -15,7 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Commands", "Trinity
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.Revolt", "Trinity.Revolt\Trinity.Revolt.csproj", "{B677C3B3-42EF-4939-82AF-CB488B96070B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trinity.DSharpPlus.Commands", "Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj", "{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trinity.DSharpPlus.Commands", "Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj", "{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RollingBot.SB.Modules.ImageModule", "RollingBot.SB.Modules.ImageModule\RollingBot.SB.Modules.ImageModule.csproj", "{6A8E4674-A151-48BE-BE07-A33FAD2B6877}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RollingBot.SB", "RollingBot.SB", "{209D2ADA-02F3-4BEB-806A-728595DE8CF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{0CFEC66F-78B4-46EB-90A4-3A31DFA4E217}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +57,17 @@ Global
 		{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBC0CBAD-2793-4D5C-87B8-8E47C8E36BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A8E4674-A151-48BE-BE07-A33FAD2B6877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A8E4674-A151-48BE-BE07-A33FAD2B6877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A8E4674-A151-48BE-BE07-A33FAD2B6877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A8E4674-A151-48BE-BE07-A33FAD2B6877}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6A8E4674-A151-48BE-BE07-A33FAD2B6877} = {0CFEC66F-78B4-46EB-90A4-3A31DFA4E217}
+		{0CFEC66F-78B4-46EB-90A4-3A31DFA4E217} = {209D2ADA-02F3-4BEB-806A-728595DE8CF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3DA14E11-F632-4DD6-8A1B-9CD0FCCF8562}

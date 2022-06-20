@@ -23,6 +23,8 @@ namespace Trinity.DiscordSharpPlus
 
         public ITrinityMessage? ReferencedMessage => X.ReferencedMessage == null ? null : new TrinityDiscordMessage(X.ReferencedMessage);
 
+        public List<ITrinityAttachment> Attachments => X.Attachments.Select(x => (ITrinityAttachment)new TrinityDiscordAttachment(x)).ToList();
+
         private List<Mention> GetMentions()
         {
             List<Mention> m = new();

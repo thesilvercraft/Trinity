@@ -98,7 +98,7 @@ namespace Trinity.Commands
             {
                 {typeof(IPlatformProvider), new Dictionary<Type, string>
                 {
-                    [typeof(string)] = "string (text, seperate strings by using quotatin marks, example: examplecommand \"1\" \"2\" \"3\" \"etc\")",
+                    [typeof(string)] = "string (text, seperate multiple by using quotation marks, example: examplecommand \"1\" \"2\" \"3\" \"etc\")",
                     [typeof(bool)] = "boolean (true(yes) or false(no))",
                     [typeof(sbyte)] = $"signed byte ({sbyte.MinValue} to {sbyte.MaxValue})",
                     [typeof(byte)] = $"byte ({byte.MinValue} to {byte.MaxValue})",

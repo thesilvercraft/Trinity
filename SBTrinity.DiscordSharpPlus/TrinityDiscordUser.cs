@@ -14,5 +14,7 @@ namespace Trinity.DiscordSharpPlus
         public string? Name { get => User.Username; }
         public DiscordUser User { get; }
         public bool IsAutomated { get => User.IsBot; }
+
+        public string Mention => User.Mention;
     }
 }

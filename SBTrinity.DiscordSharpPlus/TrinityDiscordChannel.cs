@@ -60,11 +60,11 @@ namespace Trinity.DiscordSharpPlus
 
         public async Task<ITrinityMessage> SendMessageAsync(TrinityMessageBuilder trinityMessageBuilder) => new TrinityDiscordMessage(await x.SendMessageAsync(trinityMessageBuilder.ToDiscordMessageBuilder()));
 
-        public async Task<ITrinityMessage> SendMessageAsync(string content) => new TrinityDiscordMessage(await x.SendMessageAsync(content));
+        public async Task<ITrinityMessage> SendMessageAsync(string content) => new TrinityDiscordMessage(await x.SendMessageAsync(new DiscordMessageBuilder().WithContent(content).WithAllowedMentions(Mentions.None)));
 
         public async Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed) => new TrinityDiscordMessage(await x.SendMessageAsync(embed.ToDiscordEmbed()));
 
-        public async Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed) => new TrinityDiscordMessage(await x.SendMessageAsync(content, embed.ToDiscordEmbed()));
+        public async Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed) => new TrinityDiscordMessage(await x.SendMessageAsync(new DiscordMessageBuilder().WithContent(content).WithAllowedMentions(Mentions.None).WithEmbed(embed.ToDiscordEmbed())));
 
         public Task TriggerTypingAsync() => x.TriggerTypingAsync();
     }

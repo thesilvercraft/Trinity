@@ -25,5 +25,7 @@ namespace Trinity.Revolt
         public TrinityGuid Id { get => new TrinityRevoltStringGuid(SId); set => throw new NotSupportedException("NOP"); }
         public string? Name { get => User.Username; set => throw new NotSupportedException("NOP"); }
         public bool IsAutomated { get => User.Bot != null; set => throw new NotSupportedException("NOP"); }
+
+        public string Mention => $"<@{User._id}>";
     }
 }

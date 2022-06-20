@@ -10,6 +10,7 @@ public interface ITrinityMessage
     public List<TrinityEmbed>? Embeds { get; set; }
     public List<Mention> Mentions { get; }
     public ITrinityMessage? ReferencedMessage { get; }
+    List<ITrinityAttachment> Attachments { get; }
 
     Task<ITrinityMessage> ModifyAsync(string content);
 

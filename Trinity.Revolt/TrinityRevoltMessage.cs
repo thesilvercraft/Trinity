@@ -18,6 +18,9 @@ namespace Trinity.Revolt
         public List<Mention> Mentions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public ITrinityMessage? ReferencedMessage => throw new NotImplementedException();
+
+        public List<ITrinityAttachment> Attachments => Message.Attachments.Select(x => (ITrinityAttachment)new TrinityRevoltAttachment(x)).ToList();
+
         private Channel channel;
 
         public TrinityRevoltMessage(Message message, Channel c)

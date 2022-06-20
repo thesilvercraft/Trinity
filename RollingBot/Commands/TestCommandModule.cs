@@ -12,10 +12,46 @@ namespace RollingBot.Commands
 {
     internal class TestCommandModule : BaseCommandModule
     {
+        private const string UnsupportedPlatform = "Unsupported platform, try this command out on a different platform";
+
         [Command("ay")]
         public async Task Gaming(CommandContext ctx, ITrinityUser arg)
         {
             await ctx.RespondAsync($"{arg.Id.ToGuid()}");
+        }
+
+        [Command("dump")]
+        [Description("Dump a messages raw content (useful for emote walls)")]
+        public async Task DumpMessage(CommandContext ctx, ITrinityMessage message)
+        {
+            if (ctx.Channel is ITrinityChannelWithAdvancedSendingMethods c)
+            {
+                await using var outStream = new MemoryStream(Encoding.UTF8.GetBytes(message.PlainTextMessage))
+                {
+                    Position = 0
+                };
+                await new TrinityMessageBuilder()
+                    // .WithReply(ctx.Message.Id)
+                    .WithContent($"{ctx.User.Mention}")
+                    .WithFile("message.txt", outStream)
+                    .SendAsync(c);
+            }
+            else
+            {
+                await ctx.RespondAsync(UnsupportedPlatform);
+            }
+        }
+
+        [Command("testping")]
+        public async Task TestPing(CommandContext ctx)
+        {
+            await ctx.RespondAsync($"@everyone @here <@!264081339316305920> <&749743290705903719> ");
+        }
+
+        [Command("testping")]
+        public async Task TestPing(CommandContext ctx, string userinput)
+        {
+            await ctx.RespondAsync(userinput);
         }
 
         [Command("s")]

@@ -15,5 +15,7 @@ namespace Trinity.DiscordSharpPlus
         public TrinityGuid Id { get => new TrinityUlongGuid(Member.Id); }
         public string? Name { get => Member.Username; }
         public bool IsAutomated { get => Member.IsBot; }
+
+        public string Mention => Member.Mention;
     }
 }

@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Templates\cement-seal-clear.gif" />
+    <None Remove="Templates\happy_new_year_template.png" />
+    <None Remove="Templates\joker_laugh.gif" />
+    <None Remove="Templates\linus-linus-torvalds.gif" />
+    <None Remove="Templates\motivator_template.png" />
+    <None Remove="Templates\paint_template.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Templates\cement-seal-clear.gif" />
+    <EmbeddedResource Include="Templates\happy_new_year_template.png" />
+    <EmbeddedResource Include="Templates\joker_laugh.gif" />
+    <EmbeddedResource Include="Templates\linus-linus-torvalds.gif" />
+    <EmbeddedResource Include="Templates\motivator_template.png" />
+    <EmbeddedResource Include="Templates\paint_template.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj" />
+  </ItemGroup>
+
+</Project>
