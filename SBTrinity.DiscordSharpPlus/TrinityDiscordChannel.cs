@@ -3,7 +3,7 @@ using Trinity.Shared;
 
 namespace Trinity.DiscordSharpPlus
 {
-    public class TrinityDiscordChannel : ITrinityChannelWithPinnedMessages, ITrinityChannelWithAdvancedSendingMethods
+    public class TrinityDiscordChannel : ITrinityChannelWithPinnedMessages, ITrinityChannelWithAdvancedSendingMethodsAndEmbeds
     {
         public DiscordChannel x { get; internal set; }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RollingBot.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using Trinity.Shared;
 
 namespace RollingBot.Commands
 {
+    [Category("Testing")]
     internal class TestCommandModule : BaseCommandModule
     {
         private const string UnsupportedPlatform = "Unsupported platform, try this command out on a different platform";
@@ -18,6 +20,12 @@ namespace RollingBot.Commands
         public async Task Gaming(CommandContext ctx, ITrinityUser arg)
         {
             await ctx.RespondAsync($"{arg.Id.ToGuid()}");
+        }
+
+        [Command("hi")]
+        public async Task Hello(CommandContext ctx)
+        {
+            await ctx.RespondAsync($"Hello {ctx.Member.Mention}");
         }
 
         [Command("dump")]

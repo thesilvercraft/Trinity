@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -10,14 +10,20 @@
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="2.14.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.2.0" />
+    <PackageReference Include="Serilog" Version="2.11.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.2-dev-00890" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RollingBot.SB.Modules.AnimeModule\RollingBot.SB.Modules.AnimeModule.csproj" />
     <ProjectReference Include="..\RollingBot.SB.Modules.ImageModule\RollingBot.SB.Modules.ImageModule.csproj" />
-    <ProjectReference Include="..\SBTrinity.DiscordSharpPlus\Trinity.DiscordSharpPlus.csproj" />
-    <ProjectReference Include="..\Trinity.Commands\Trinity.Commands.csproj" />
-    <ProjectReference Include="..\Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj" />
-    <ProjectReference Include="..\Trinity.Revolt\Trinity.Revolt.csproj" />
+    <ProjectReference Include="..\RollingBot.Shared\RollingBot.Shared.csproj" />
+    <ProjectReference Include="..\SBTrinity.DiscordSharpPlus\SilverCraft.Trinity.DiscordSharpPlus.csproj" />
+    <ProjectReference Include="..\Trinity.Commands\SilverCraft.Trinity.Commands.csproj" />
+    <ProjectReference Include="..\Trinity.DSharpPlus.Commands\SilverCraft.Trinity.DSharpPlus.Commands.csproj" />
+    <ProjectReference Include="..\Trinity.Revolt\SilverCraft.Trinity.Revolt.csproj" />
   </ItemGroup>
 
 </Project>

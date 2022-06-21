@@ -51,11 +51,6 @@ namespace Trinity.Revolt
             return new TrinityRevoltMessage(await Channel.SendMessageAsync(content), Channel);
         }
 
-        public Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed)
-        {
-            throw new NotSupportedException("NOP");
-        }
-
         public Task TriggerTypingAsync()
         {
             return Channel.BeginTypingAsync();
@@ -98,11 +93,6 @@ namespace Trinity.Revolt
                 message = await Channel.SendMessageAsync(trinityMessageBuilder.Content);
             }
             return new TrinityRevoltMessage(message, Channel);
-        }
-
-        public Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed)
-        {
-            throw new NotImplementedException("NOP");
         }
 
         public Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityMessage, TrinityMessageBuilder trinityMessageBuilder)

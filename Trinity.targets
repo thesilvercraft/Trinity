@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<Optimize>True</Optimize>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DebugType>Portable</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Company>SilverCraft</Company>
+		<Product>SilverCraft.Trinity</Product>
+		<Authors>SilverCraft</Authors>
+		<Version>0.0.1-prerelease</Version>
+		<RepositoryUrl>https://github.com/thesilvercraft/Trinity</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/thesilvercraft/Trinity</PackageProjectUrl>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<Optimize>False</Optimize>
+	</PropertyGroup>
+</Project>

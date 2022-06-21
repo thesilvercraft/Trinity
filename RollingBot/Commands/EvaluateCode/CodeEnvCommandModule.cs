@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
+using RollingBot.Shared;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,6 +16,8 @@ using Trinity.Shared;
 
 namespace RollingBot.Commands.EvaluateCode
 {
+    [Category("Owner only")]
+    [RequireOwner]
     internal class CodeEnvCommandModule : BaseCommandModule
     {
         public static string RemoveCodeBraces(string str)

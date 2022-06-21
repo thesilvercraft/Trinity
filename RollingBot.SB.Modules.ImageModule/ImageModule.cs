@@ -1,4 +1,5 @@
-﻿using SilverBotDS.Converters;
+﻿using RollingBot.Shared;
+using SilverBotDS.Converters;
 using SilverBotDS.Exceptions;
 using SilverBotDS.Utils;
 using SixLabors.Fonts;
@@ -24,6 +25,7 @@ using Trinity.Shared;
 namespace RollingBot.SB.Modules;
 
 [Cooldown(1, 2, CooldownBucketType.User)]
+[Category("Image")]
 public class ImageModule : BaseCommandModule//, IRequireFonts
 {
     public enum EFilter
@@ -164,7 +166,7 @@ public class ImageModule : BaseCommandModule//, IRequireFonts
     /// </summary>
     /// <param name="photoBytes">The <see cref="byte" /> of the original picture</param>
     /// <param name="filter">The <see cref="IMatrixFilter" /> to use</param>
-    /// <returns>A <see cref="MemoryStream" /> with a <see cref="PngFormat" /> of 70 Quality</returns>
+    /// <returns>A <see cref="MemoryStream" />
     private static async Task<Tuple<MemoryStream, string>> FilterImgBytes(byte[] photoBytes, EFilter filter)
     {
         using var img = Image.Load(photoBytes, out var frmt);
@@ -178,7 +180,7 @@ public class ImageModule : BaseCommandModule//, IRequireFonts
         return new Tuple<MemoryStream, string>(stream, frmt.FileExtensions.First());
     }
 
-    private const string OutputFileLargerThan8M = "output is too large";
+    private const string OutputFileLargerThan8M = "output is too large (8MB max, got {0})";
 
     [Command("jpeg")]
     public async Task Jpegize(CommandContext ctx, [Description("the url of the image")] SdImage image)
@@ -438,11 +440,13 @@ public class ImageModule : BaseCommandModule//, IRequireFonts
         await CommonCodeWithTemplate(ctx, "RollingBot.SB.Modules.ImageModule.Templates.cement-seal-clear.gif", (img) =>
         {
             Font jokerFont = new(_jokerFontFamily, img.Width / 10);
-            var dr = new TextOptions(jokerFont);
-            dr.HorizontalAlignment = HorizontalAlignment.Center;
-            dr.VerticalAlignment = VerticalAlignment.Center;
-            dr.WrappingLength = img.Width;
-            dr.Origin = new PointF(img.Width / 2, img.Height / 2);
+            var dr = new TextOptions(jokerFont)
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                WrappingLength = img.Width,
+                Origin = new PointF(img.Width / 2, img.Height / 6)
+            };
             img.Mutate(m => m.DrawText(dr, text, Color.Black/* new PointF(0, 124f)*/));
 
             return Task.FromResult(new Tuple<bool, Image>(true, img));
@@ -650,15 +654,17 @@ public class ImageModule : BaseCommandModule//, IRequireFonts
         var font = new Font(_captionFont, x / 10);
         await using var outStream = new MemoryStream();
         FontRectangle textSize;
-        var dr = new TextOptions(font);
-        dr.HorizontalAlignment = HorizontalAlignment.Center;
-        dr.VerticalAlignment = VerticalAlignment.Center;
+        var dr = new TextOptions(font)
+        {
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            Origin = new System.Numerics.Vector2(bitmap.Width / 2, 20)
+        };
         textSize = TextMeasurer.Measure(text, dr);
         using (var img2 = new Image<Rgba32>(x, y + (int)textSize.Height))
         {
             img2.Mutate(o => o.Fill(Color.FromRgb(255, 255, 255)));
-            img2.Mutate(o => o.DrawText(dr, text, Brushes.Solid(Color.FromRgb(0, 0, 0))
-                /*new PointF(img2.Width / 2, textSize.Height / 2)*/));
+            img2.Mutate(o => o.DrawText(dr, text, Brushes.Solid(Color.Black)));
             img2.Mutate(o => o.DrawImage(bitmap, new Point(0, (int)textSize.Height), 1));
             img2.Save(outStream, frmt);
         }

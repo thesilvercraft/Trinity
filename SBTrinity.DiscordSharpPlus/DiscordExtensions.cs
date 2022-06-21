@@ -116,7 +116,7 @@ namespace Trinity.DiscordSharpPlus
             {
                 builder.Content = messageBuilder.Content;
             }
-          
+
             if (messageBuilder.Embeds.Any())
             {
                 foreach (var embed in messageBuilder.Embeds)

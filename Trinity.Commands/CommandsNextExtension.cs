@@ -180,9 +180,16 @@ namespace Trinity.Commands
         /// </summary>
         /// <param name="client">DO NOT USE THIS MANUALLY.</param>
         /// <exception cref="InvalidOperationException"/>
-        public override void Setup(IPlatformProvider client)
+        public override void Setup(IPlatformProvider client, ILogger log = null)
         {
-            Logger = new GamingLogger();
+            if (log != null)
+            {
+                Logger = log;
+            }
+            else if (Logger == null)
+            {
+                Logger = new BareLogger();
+            }
 
             if (Config.UseDefaultCommandHandler)
                 client.MessageRecieved += this.HandleCommandsAsync;

@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+    <Import Project="../Trinity.targets" />
+    <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+   
 
   <ItemGroup>
     <PackageReference Include="Emzi0767.Common" Version="2.6.6" />
@@ -13,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SBTrinity.Shared\Trinity.Shared.csproj" />
+    <ProjectReference Include="..\SBTrinity.Shared\SilverCraft.Trinity.Shared.csproj" />
   </ItemGroup>
 
 </Project>

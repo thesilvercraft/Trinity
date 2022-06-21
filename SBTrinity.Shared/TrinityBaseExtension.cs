@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,6 @@ namespace Trinity.Shared
             return Task.CompletedTask;
         }
 
-        public abstract void Setup(IPlatformProvider platform);
+        public abstract void Setup(IPlatformProvider platform, ILogger log = null);
     }
 }

@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Revolt.Net" Version="0.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SBTrinity.Shared\Trinity.Shared.csproj" />
+    <ProjectReference Include="..\RollingBot.Shared\RollingBot.Shared.csproj" />
+    <ProjectReference Include="..\Trinity.Commands\SilverCraft.Trinity.Commands.csproj" />
   </ItemGroup>
 
 </Project>

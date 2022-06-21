@@ -73,7 +73,7 @@ namespace Trinity.DiscordSharpPlus
 
         public Task<ITrinityMessage>? RespondAsync(TrinityEmbed embed)
         {
-            if (Channel is ITrinityChannelWithAdvancedSendingMethods c)
+            if (Channel is ITrinityChannelWithAdvancedSendingMethodsAndEmbeds c)
             {
                 return c.SendMessageAsync(embed);
             }
@@ -82,7 +82,7 @@ namespace Trinity.DiscordSharpPlus
 
         public Task<ITrinityMessage>? RespondAsync(string content, TrinityEmbed embed)
         {
-            if (Channel is ITrinityChannelWithAdvancedSendingMethods c)
+            if (Channel is ITrinityChannelWithAdvancedSendingMethodsAndEmbeds c)
             {
                 return c.SendMessageAsync(content, embed);
             }

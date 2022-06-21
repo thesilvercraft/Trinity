@@ -30,7 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Trinity.DSharpPlus.Commands\Trinity.DSharpPlus.Commands.csproj" />
+    <ProjectReference Include="..\RollingBot.Shared\RollingBot.Shared.csproj" />
+    <ProjectReference Include="..\Trinity.DSharpPlus.Commands\SilverCraft.Trinity.DSharpPlus.Commands.csproj" />
   </ItemGroup>
 
 </Project>

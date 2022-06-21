@@ -48,13 +48,16 @@
 
     public interface ITrinityChannelWithAdvancedSendingMethods : ITrinityChannel
     {
-        Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed);
-
         Task<ITrinityMessage> SendMessageAsync(TrinityMessageBuilder trinityMessageBuilder);
 
+        Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityDiscordMessage, TrinityMessageBuilder trinityMessageBuilder);
+    }
+
+    public interface ITrinityChannelWithAdvancedSendingMethodsAndEmbeds : ITrinityChannelWithAdvancedSendingMethods
+    {
         Task<ITrinityMessage> SendMessageAsync(string content, TrinityEmbed embed);
 
-        Task<ITrinityMessage> ModifyAsync(ITrinityMessage trinityDiscordMessage, TrinityMessageBuilder trinityMessageBuilder);
+        Task<ITrinityMessage> SendMessageAsync(TrinityEmbed embed);
     }
 
     public interface ITrinityChannelWithPinnedMessages : ITrinityChannel

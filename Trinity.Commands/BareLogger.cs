@@ -25,7 +25,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Trinity.Commands
 {
-    internal class GamingLogger : ILogger
+    internal class BareLogger : ILogger
     {
         public IDisposable BeginScope<TState>(TState state)
         {
