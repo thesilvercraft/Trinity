@@ -42,4 +42,3 @@ By making a contribution to this project, I certify that:
     maintained indefinitely and may be redistributed consistent with
     this project or the open source license(s) involved.
 ```
-You also agree to submiting your contribution in its entirety under the GPL 3.0 license which can be found at https://www.gnu.org/licenses/gpl-3.0.en.html
